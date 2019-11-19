@@ -1,4 +1,5 @@
-const books = [{ title: "initial book" }];
+/* eslint-disable */
+const books = [{ title: 'initial book' }];
 
 const Query = {
   book: (parent, params, context) => {

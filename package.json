@@ -8,6 +8,8 @@
     "start": "node index",
     "dev": "nodemon -e js,json,graphql",
     "debug": "nodemon --inspect -e js,json,graphql",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
     "db:create": "sequelize db:create",
     "db:migrate": "sequelize db:migrate",
     "db:seed": "sequelize db:seed:all",
@@ -24,7 +26,13 @@
     "sequelize": "^5.17.0"
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
     "nodemon": "^1.19.1",
+    "prettier": "^1.19.1",
     "sequelize-cli": "^5.5.0"
   }
 }

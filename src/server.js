@@ -1,7 +1,7 @@
-const { ApolloServer, gql } = require("apollo-server");
-const typeDefs = gql(require("./graphql/schema"));
-const resolvers = require("./graphql/resolvers");
-const db = require("./models");
+const { ApolloServer, gql } = require('apollo-server');
+const typeDefs = gql(require('./graphql/schema'));
+const resolvers = require('./graphql/resolvers');
+const db = require('./models');
 
 /*
  * Get operation name of the current request
@@ -15,9 +15,8 @@ const getOperationNameFromDoc = ({ doc, req }) => {
   const { definitions } = doc;
   const operationName =
     definitions.length > 1
-      ? definitions.find(
-          element => element.name.value === req.body.operationName
-        ).selectionSet.selections[0].name.value
+      ? definitions.find(element => element.name.value === req.body.operationName)
+          .selectionSet.selections[0].name.value
       : definitions[0].selectionSet.selections[0].name.value;
   return operationName;
 };
@@ -26,27 +25,27 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    if (req.method === "get") return null;
+    if (req.method === 'get') return null;
     const doc = gql(req.body.query);
     const operationName = getOperationNameFromDoc({ doc, req });
-    console.log({ operationName });
+    console.log({ operationName }); // eslint-disable-line no-console
     return { db };
   },
   formatError: err => {
     // TODO: handle internal server errors
-    console.log(err);
+    console.log(err); // eslint-disable-line no-console
     return err;
   },
   cors: true,
-  introspection: process.env.NODE_ENV !== "production",
-  playground: process.env.NODE_ENV !== "production",
-  debug: process.env.NODE_ENV !== "production",
-  tracing: process.env.NODE_ENV !== "production"
+  introspection: process.env.NODE_ENV !== 'production',
+  playground: process.env.NODE_ENV !== 'production',
+  debug: process.env.NODE_ENV !== 'production',
+  tracing: process.env.NODE_ENV !== 'production'
 });
 
 module.exports = {
-  listen: ({ port = 3000, path = "/graphql" } = {}) =>
+  listen: ({ port = 3000, path = '/graphql' } = {}) =>
     server.listen({ port, path }).then(({ url }) => {
-      console.log(`🚀 Server ready at ${url}`);
+      console.log(`🚀 Server ready at ${url}`); // eslint-disable-line no-console
     })
 };
