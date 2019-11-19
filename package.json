@@ -6,11 +6,19 @@
   "license": "MIT",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon"
+    "dev": "nodemon -e js,json,graphql",
+    "debug": "nodemon --inspect -e js,json,graphql",
+    "db:create": "sequelize db:create",
+    "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed:all",
+    "db:drop": "sequelize db:drop",
+    "db:setup": "yarn db:create && yarn db:migrate && yarn db:seed",
+    "db:reset": "yarn db:drop && yarn db:setup"
   },
   "dependencies": {
     "apollo-server": "^2.9.0",
     "graphql": "^14.5.3",
+    "merge-graphql-schemas": "^1.7.3",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.17.0"
