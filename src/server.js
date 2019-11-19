@@ -1,4 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server');
+const { buildFederatedSchema } = require('@apollo/federation');
 const typeDefs = gql(require('./graphql/schema'));
 const resolvers = require('./graphql/resolvers');
 const db = require('./models');
@@ -22,8 +23,7 @@ const getOperationNameFromDoc = ({ doc, req }) => {
 };
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: buildFederatedSchema({ typeDefs, resolvers }),
   context: ({ req }) => {
     if (req.method === 'get') return null;
     const doc = gql(req.body.query);

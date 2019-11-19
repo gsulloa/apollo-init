@@ -1,4 +1,4 @@
-type Book {
+type Book @key(fields: "title") {
   title: String!
 }
 
