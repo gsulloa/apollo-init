@@ -1,8 +1,8 @@
-const { ApolloServer, gql } = require('apollo-server');
-const { buildFederatedSchema } = require('@apollo/federation');
-const typeDefs = gql(require('./graphql/schema'));
-const resolvers = require('./graphql/resolvers');
-const db = require('./models');
+import { ApolloServer, gql } from 'apollo-server';
+import { buildFederatedSchema } from '@apollo/federation';
+import resolvers from './graphql/resolvers';
+import typeDefs from './graphql/schema';
+import * as db from './models';
 
 /*
  * Get operation name of the current request
@@ -16,8 +16,9 @@ const getOperationNameFromDoc = ({ doc, req }) => {
   const { definitions } = doc;
   const operationName =
     definitions.length > 1
-      ? definitions.find(element => element.name.value === req.body.operationName)
-          .selectionSet.selections[0].name.value
+      ? definitions.find(
+          element => element.name.value === req.body.operationName,
+        ).selectionSet.selections[0].name.value
       : definitions[0].selectionSet.selections[0].name.value;
   return operationName;
 };
@@ -40,12 +41,9 @@ const server = new ApolloServer({
   introspection: process.env.NODE_ENV !== 'production',
   playground: process.env.NODE_ENV !== 'production',
   debug: process.env.NODE_ENV !== 'production',
-  tracing: process.env.NODE_ENV !== 'production'
+  tracing: process.env.NODE_ENV !== 'production',
 });
-
-module.exports = {
-  listen: ({ port = 3000, path = '/graphql' } = {}) =>
-    server.listen({ port, path }).then(({ url }) => {
-      console.log(`🚀 Server ready at ${url}`); // eslint-disable-line no-console
-    })
-};
+export const listen = ({ port = 3000, path = '/graphql' } = {}) =>
+  server.listen({ port, path }).then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`); // eslint-disable-line no-console
+  });

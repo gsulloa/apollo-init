@@ -1,7 +1,7 @@
 import * as server from './server';
-import * as db from './models';
+import { sequelize } from './config/database';
 
-db.sequelize.authenticate().then(() => {
+sequelize.authenticate().then(() => {
   console.log(`Connection to database successfully`);
   server.listen();
 });

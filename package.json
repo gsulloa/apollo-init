@@ -5,7 +5,7 @@
   "author": "Gabriel Ulloa <gabriel.ulloa.e+dev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index",
+    "start": "yarn build && node dist/main",
     "dev": "nodemon -e js,json,graphql",
     "debug": "nodemon --inspect -e js,json,graphql",
     "lint": "eslint src/",
@@ -16,7 +16,7 @@
     "db:drop": "sequelize db:drop",
     "db:setup": "yarn db:create && yarn db:migrate && yarn db:seed",
     "db:reset": "yarn db:drop && yarn db:setup",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "postbuild": "copyfiles -u 1 \"src/**/*.graphql\" dist"
   },
   "dependencies": {
