@@ -15,7 +15,9 @@
     "db:seed": "sequelize db:seed:all",
     "db:drop": "sequelize db:drop",
     "db:setup": "yarn db:create && yarn db:migrate && yarn db:seed",
-    "db:reset": "yarn db:drop && yarn db:setup"
+    "db:reset": "yarn db:drop && yarn db:setup",
+    "build": "tsc",
+    "postbuild": "copyfiles -u 1 \"src/**/*.graphql\" dist"
   },
   "dependencies": {
     "@apollo/federation": "^0.11.3",
@@ -27,6 +29,7 @@
     "sequelize": "^5.21.3"
   },
   "devDependencies": {
+    "copyfiles": "^2.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.9.0",
@@ -34,6 +37,8 @@
     "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
-    "sequelize-cli": "^5.5.1"
+    "sequelize-cli": "^5.5.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.7.5"
   }
 }
