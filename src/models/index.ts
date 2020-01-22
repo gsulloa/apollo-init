@@ -1,7 +1,1 @@
-import { Sequelize } from 'sequelize';
-import { sequelize } from '../config/database';
-
-export const db = {
-  sequelize,
-  Sequelize,
-};
+export { default as User } from './user.models';

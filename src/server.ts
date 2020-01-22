@@ -2,7 +2,7 @@ import { ApolloServer, gql } from 'apollo-server';
 import { buildFederatedSchema } from '@apollo/federation';
 import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/schema';
-import * as db from './models';
+import { Context } from './models/context.interface';
 
 /*
  * Get operation name of the current request
@@ -25,12 +25,12 @@ const getOperationNameFromDoc = ({ doc, req }) => {
 
 const server = new ApolloServer({
   schema: buildFederatedSchema({ typeDefs, resolvers }),
-  context: ({ req }) => {
+  context: ({ req }): Context => {
     if (req.method === 'get') return null;
     const doc = gql(req.body.query);
     const operationName = getOperationNameFromDoc({ doc, req });
     console.log({ operationName }); // eslint-disable-line no-console
-    return { db };
+    return {};
   },
   formatError: err => {
     // TODO: handle internal server errors

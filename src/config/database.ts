@@ -35,3 +35,7 @@ export const sequelize = new Sequelize(
   config.password,
   config,
 );
+
+export const development = configs.development;
+export const test = configs.test;
+export const production = configs.production;
