@@ -1,4 +1,11 @@
 import { Options, Sequelize } from 'sequelize';
+import {
+  NODE_ENV,
+  DATABASE_USER,
+  DATABASE_PASSWORD,
+  DATABASE_HOST,
+  DATABASE_PORT,
+} from './environment';
 const PROJECT_NAME = 'apollo_boilerplate';
 
 const configs = {
@@ -17,17 +24,16 @@ const configs = {
     dialect: 'postgres',
   },
   production: {
-    username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
+    username: DATABASE_USER,
+    password: DATABASE_PASSWORD,
     database: `${PROJECT_NAME}_production`,
-    host: process.env.DATABASE_HOST,
-    port: Number(process.env.DATABASE_PORT),
+    host: DATABASE_HOST,
+    port: DATABASE_PORT,
     dialect: 'postgres',
   },
 };
 
-const env = process.env.NODE_ENV || 'development';
-const config: Options = configs[env];
+const config: Options = configs[NODE_ENV];
 
 export const sequelize = new Sequelize(
   config.database,
