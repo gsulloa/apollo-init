@@ -15,10 +15,7 @@ const server = new ApolloServer({
   debug: IS_PRODUCTION,
   tracing: IS_PRODUCTION,
 });
-export const listen = ({
-  port = 3000,
-  path = '/graphql',
-} = {}): Promise<void> =>
+export const listen = ({ port = 3000, path = '/' } = {}): Promise<void> =>
   server.listen({ port, path }).then(({ url }): void => {
     console.log(`🚀 Server ready at ${url}`);
   });
