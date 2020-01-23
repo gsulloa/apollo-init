@@ -10,12 +10,12 @@ const server = new ApolloServer({
   context: buildContext,
   formatError: transformInternalErrors,
   cors: true,
-  introspection: IS_PRODUCTION,
-  playground: IS_PRODUCTION,
-  debug: IS_PRODUCTION,
-  tracing: IS_PRODUCTION,
+  introspection: !IS_PRODUCTION,
+  playground: !IS_PRODUCTION,
+  debug: !IS_PRODUCTION,
+  tracing: !IS_PRODUCTION,
 });
-export const listen = ({ port = 3000, path = '/' } = {}): Promise<void> =>
-  server.listen({ port, path }).then(({ url }): void => {
+export const listen = ({ port = 3000 } = {}): Promise<void> =>
+  server.listen({ port }).then(({ url }): void => {
     console.log(`🚀 Server ready at ${url}`);
   });

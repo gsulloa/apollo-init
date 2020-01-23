@@ -16,13 +16,13 @@ export const getOperationNames = ({ req }): string[] => {
   const operationNames: string[] =
     definitions.length > 1
       ? (definitions as OperationDefinitionNode[])
-        .find(element => element.name.value === req.body.operationName)
-        .selectionSet.selections.map(
-          (selection: FieldNode) => selection.name.value,
-        )
+          .find(element => element.name.value === req.body.operationName)
+          .selectionSet.selections.map(
+            (selection: FieldNode) => selection.name.value,
+          )
       : (definitions as OperationDefinitionNode[])[0].selectionSet.selections.map(
-        (selection: FieldNode) => selection.name.value,
-      );
+          (selection: FieldNode) => selection.name.value,
+        );
   return operationNames;
 };
 
@@ -33,7 +33,7 @@ export const transformInternalErrors = (error: GraphQLError): GraphQLError => {
 };
 
 export const buildContext = ({ req }): Context => {
-  if (req.method === 'get') return null;
+  if (req.method.match(/get/i)) return null;
   const operationNames = getOperationNames({ req });
   console.log({ operationNames }); // eslint-disable-line no-console
   return { getUser: (): User => new User() };

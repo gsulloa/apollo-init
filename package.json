@@ -5,9 +5,9 @@
   "author": "Gabriel Ulloa <gabriel.ulloa.e+dev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn build && node dist/main",
-    "dev": "nodemon -e js,json,graphql",
-    "debug": "nodemon --inspect -e js,json,graphql",
+    "start": "yarn build && node ./dist/main",
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/main",
+    "debug": "ts-node-dev --inspect --respawn --transpileOnly ./src/main",
     "lint": "tsc --noEmit && eslint ./src/ --ext .js,.ts",
     "lint:fix": "prettier --write \"./src/**/*.ts\" && tsc --noEmit && eslint ./src/ --ext .js,.ts --fix",
     "db:create": "sequelize db:create",
@@ -37,6 +37,7 @@
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "sequelize-cli": "^5.5.1",
+    "ts-node-dev": "^1.0.0-pre.44",
     "tsc": "^1.20150623.0",
     "typescript": "^3.7.5"
   }

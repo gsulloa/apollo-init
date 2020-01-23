@@ -13,7 +13,7 @@ const resolvers = fs
       file !== basename &&
       (file.slice(-4) === 's.js' || file.slice(-4) === 's.ts'),
   )
-  .map(file => require(`./${file}`).default)
+  .map(file => require(`./${file}`))
   .filter(e => e);
 const exportResolvers = resolvers.reduce(
   (
